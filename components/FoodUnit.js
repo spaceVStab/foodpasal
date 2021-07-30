@@ -40,16 +40,16 @@ export const FoodUnit = ( props ) => {
     }
 
     return(
-        <div className="flex flex-row gap-5">
-            <Image 
-                className="rounded-lg drop-shadow-2xl"
+        <div className="flex flex-col md:flex-row gap-5">
+            <img 
+                className="rounded-lg"
                 src="/logo.png"
-                height={150}
                 width={150}
+                height={150}
             />
             <div className="flex flex-col gap-5">
                 <p className="text-xl font-semibold">{props.foodItems.productName}</p>
-                <p className="w-80 text-md font-light">1x Mini Plain Butter  Dosa + 1x Mini Vada + 2x Idli + 1x</p>
+                <p className="max-w-80 text-md font-light">1x Mini Plain Butter  Dosa + 1x Mini Vada + 2x Idli + 1x</p>
                 <div className="flex flex-row justify-between">
                     <p className="self-center text-xl">{props.foodItems.productPrice}</p>
                     <div>

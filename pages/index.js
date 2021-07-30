@@ -30,12 +30,12 @@ export default function Home() {
         <title>Create Next App</title>
       </Head>
 
-      <main>
+      <main className="bg-gray-100">
         <Header />
         {/* banner */}
 
         {/* display food items */}
-        <div className="flex mt-10 flex-row justify-center gap-10">
+        <div className="flex ml-5 mr-5 mt-10 mb-20 flex-row justify-center gap-5">
           {/* categories  */}
             <CategoryCard categories={categories} />
 
@@ -47,6 +47,7 @@ export default function Home() {
               <CartDetail productKeyed={productKeyed}/>
             </CartContext.Provider>
         </div>
+        <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
       </main>
     </div>
   )
