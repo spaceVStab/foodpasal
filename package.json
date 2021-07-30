@@ -1,11 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3014",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.3",
+    "@supabase/supabase-js": "^1.21.0",
+    "daisyui": "^1.10.0",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
