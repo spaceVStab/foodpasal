@@ -4,8 +4,40 @@ import Header from '../components/Header'
 import { CategoryList } from '../resources/categoryList'
 import FoodItemList from '@/components/FoodItemList'
 import CartDetail from '@/components/CartDetail'
+import HeaderMob from '@/components/HeaderMob'
 import { useState } from 'react'
 import { CartContext } from '@/components/CartContext'
+import { useCallback } from 'react'
+import FoodItemListMob from '@/components/FoodItemListMob'
+import { useEffect } from 'react'
+import CartNavBarMob from '@/components/CartNavBarMob'
+
+const useMediaQuery = (width) => {
+  const [targetReached, setTargetReached] = useState(false);
+
+  const updateTarget = useCallback((e) => {
+    if (e.matches) {
+      setTargetReached(true);
+    } else {
+      setTargetReached(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${width}px)`)
+    media.addEventListener('change', e => updateTarget(e))
+
+    // Check on mount (callback is not called until a change occurs)
+    if (media.matches) {
+      setTargetReached(true)
+    }
+
+    return () => media.removeEventListener('change', e => updateTarget(e))
+  }, [])
+
+  return targetReached;
+};
+
 
 export default function Home() {
 
@@ -24,13 +56,15 @@ export default function Home() {
   })
   console.log(productKeyed)
 
+  const isBreakpoint = useMediaQuery(768)
+
   return (
-    <div className="bg-gray-100">
+    <div>
       <Head>
         <title>Create Next App</title>
       </Head>
 
-      <main className="bg-gray-100">
+      {!isBreakpoint && (<main className="bg-gray-100">
         <Header />
         {/* banner */}
 
@@ -48,7 +82,17 @@ export default function Home() {
             </CartContext.Provider>
         </div>
         <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
-      </main>
+      </main>)}
+      { isBreakpoint && (
+        <main>
+          <HeaderMob />
+
+          <CartContext.Provider value={{cartItems, setCartItems}}>
+            <FoodItemListMob foodList={CategoryList} />
+            <CartNavBarMob productKeyed={productKeyed}/>
+          </CartContext.Provider>
+        </main>
+      )}
     </div>
   )
 }

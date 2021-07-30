@@ -1,14 +1,14 @@
+import Image from "next/image";
 import { useState } from "react";
 import {
     HeartIcon,
     PlusCircleIcon,
     MinusCircleIcon
 } from "@heroicons/react/solid"
-import Image from "next/image";
-import { CartContext } from "./CartContext";
 import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
-export const FoodUnit = ( props ) => {
+export const FoodUnitMob = ( props ) => {
     const [itemCount, setItemCount] = useState(0);
     const {cartItems, setCartItems} = useContext(CartContext)
 
@@ -26,8 +26,6 @@ export const FoodUnit = ( props ) => {
     const increaseItemCount = () => {
         setItemCount(itemCount+1)
         const cart = {...cartItems};
-        // check if exists
-        console.log(cart)
         if (props.foodItems.productId in cart) {
             const c = cart[props.foodItems.productId]
             cart[props.foodItems.productId] = 1 + c
@@ -35,28 +33,29 @@ export const FoodUnit = ( props ) => {
         else {
             cart[props.foodItems.productId] = 1
         }
-        // cart[props.foodItems.productId] = 1
         setCartItems(cart)
     }
 
-    return(
-        <div className="flex flex-col pt-5 pb-5 lg:flex-row gap-5">
-            <img 
-                className="rounded-lg"
+    return (
+        <div className="flex flex-row gap-5 self-center pt-2 pb-2">
+            <div className="self-center">
+                <Image
                 src="/logo.png"
-                width={150}
-                height={150}
-            />
-            <div className="flex flex-col gap-5">
+                className="rounded-lg"
+                width={100}
+                height={100}
+                />
+            </div>
+            <div className="flex flex-col justify-around">
                 <p className="text-xl font-semibold">{props.foodItems.productName}</p>
-                <p className="max-w-80 text-md font-light">1x Mini Plain Butter  Dosa + 1x Mini Vada + 2x Idli + 1x</p>
+                <p className="w-52 text-sm font-light">1x Mini Plain Butter  Dosa + 1x Mini Vada + 2x Idli + 1x</p>
                 <div className="flex flex-row justify-between">
-                    <p className="self-center text-xl">{props.foodItems.productPrice}</p>
+                    <p className="self-center text-lg">{props.foodItems.productPrice}</p>
                     <div>
-                        <p className="text-sm font-light mt-2">No. Of Unit</p>
+                        {/* <p className="text-sm font-light mt-2">No. Of Unit</p> */}
                         <div className="flex flex-row gap-2">
                             <MinusCircleIcon onClick={decreaseItemCount} className="cursor-pointer h-6 text-red-500"/>
-                            <p className="bg-gray-300 rounded-full pl-5 pr-5 ">{itemCount}</p>
+                            <p className="bg-gray-300 rounded-full pl-5 pr-5">{itemCount}</p>
                             <PlusCircleIcon onClick={increaseItemCount} className="cursor-pointer h-6 text-red-500" />
                         </div>
                     </div>
@@ -64,7 +63,6 @@ export const FoodUnit = ( props ) => {
             </div>
         </div>
     )
-
 }
 
-export default FoodUnit;
+export default FoodUnitMob;

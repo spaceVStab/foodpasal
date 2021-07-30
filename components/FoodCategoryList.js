@@ -39,7 +39,7 @@ export const FoodCategoryList = ( props ) => {
     }
 
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-2 divide-y">
             {props.foodUnitCategory.map((foodItems, index) => (
                 <FoodUnit foodItems={foodItems} />
             ))}
