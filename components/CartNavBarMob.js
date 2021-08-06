@@ -16,7 +16,7 @@ export const CartNavBarMob = ({productKeyed}) => {
         let count = 0;
         Object.entries(cartItems).map((v,k) => {
             count += parseInt(v[1]);
-            sum += parseInt(productKeyed[k.toString()].productPrice.replace(/[^0-9]/g,'')) * parseInt(v[1]);
+            sum += parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1]);
         })
         setTotalSum(sum)
         setTotalItem(count)
@@ -52,11 +52,11 @@ export const CartNavBarMob = ({productKeyed}) => {
                         <div className="flex flex-col pl-5 pr-5 gap-5 divide-y-2">
                         {Object.entries(cartItems).map((v, k) => (
                             <div>
-                                {v[1]>0 && <p className="text-lg font-medium">{productKeyed[k.toString()].productName}</p>}
+                                {v[1]>0 && <p className="text-2xl font-medium">{productKeyed[v[0].toString()].item_name}</p>}
                                 <div className="flex flex-row justify-between">
-                                    {v[1]>0 && <p className="font-light">{productKeyed[k.toString()].productPrice}</p>}
-                                    {v[1]>0 && <p className="font-medium">x {v[1]}</p>}
-                                    {v[1]>0 && <p>Rs. {parseInt(productKeyed[k.toString()].productPrice.replace(/[^0-9]/g,'')) * parseInt(v[1])}/-</p>}
+                                    {v[1]>0 && <p className="font-light text-xl">Rs. {productKeyed[v[0].toString()].item_price}/-</p>}
+                                    {v[1]>0 && <p className="font-medium text-xl">x {v[1]}</p>}
+                                    {v[1]>0 && <p className="text-xl">Rs. {parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1])}/-</p>}
                                 </div>
                             </div>
                         ))}
@@ -65,7 +65,7 @@ export const CartNavBarMob = ({productKeyed}) => {
                             {totalSum>0 && <p className="font-light text-md self-center">Total Amount</p>}
                             {totalSum>0 && <p className="font-medium text-2xl self-center">Rs. {totalSum}/-</p>}
                         </div>
-                        <div className="pt-5 self-center">
+                        {/* <div className="pt-5 self-center">
                             <textarea 
                                 type="text"
                                 placeholder="Additional Note For Us"
@@ -75,11 +75,13 @@ export const CartNavBarMob = ({productKeyed}) => {
                                 }}
                                 className="outline-none border-2 border-red-500 w-72 h-20 rounded-xl text-lg pl-2 shadow-xl"
                             />
-                        </div>
+                        </div> */}
+                        <Link href="/checkout">
                         {totalSum > 0 && (<div className="mt-5 self-center pl-5 pr-5 flex flex-row bg-red-500 rounded-2xl shadow-xl">
                             <p className="self-center text-2xl font-medium text-white">Place Order</p>
                             <ChevronDoubleRightIcon className="self-center text-white h-10"/>
                         </div>)}
+                        </Link>
                     </div>
                 )
             }

@@ -1,16 +1,40 @@
 import Head from 'next/head'
 import CategoryCard from '../components/CategoryCard'
 import Header from '../components/Header'
+import CategorySelectMob from '@/components/CategorySelectMob'
 import { CategoryList } from '../resources/categoryList'
 import FoodItemList from '@/components/FoodItemList'
 import CartDetail from '@/components/CartDetail'
 import HeaderMob from '@/components/HeaderMob'
+import { supabase } from '@/utils/supabaseClient'
 import { useState } from 'react'
 import { CartContext } from '@/components/CartContext'
 import { useCallback } from 'react'
 import FoodItemListMob from '@/components/FoodItemListMob'
 import { useEffect } from 'react'
 import CartNavBarMob from '@/components/CartNavBarMob'
+import { getActiveFoodItemsForShop } from '@/utils/supabaseClient'
+import { getCategory } from '@/utils/supabaseClient'
+
+export const getStaticProps = async () => {
+  const products = await getActiveFoodItemsForShop();
+  const categories = await getCategory();
+
+  categories.map( (category, index) => {
+    let temp = []
+    products.some((e) => {
+      if(e.category_id == category.category_id) {
+        temp.push(e)
+      }
+    })
+    category['fooditems'] = temp
+  })
+
+  return {
+    props: { categoriesSupa:categories },
+    revalidate: 300,
+  }
+}
 
 const useMediaQuery = (width) => {
   const [targetReached, setTargetReached] = useState(false);
@@ -39,22 +63,29 @@ const useMediaQuery = (width) => {
 };
 
 
-export default function Home() {
+export default function Home( {categoriesSupa} ) {
 
-  const [cartItems, setCartItems] = useState({})
+  console.log(categoriesSupa)
 
   const categories = []
-  let productList = []
-  CategoryList.map((category, index) => {
-    categories.push(category.categoryName)
-    productList = productList.concat(category.productList)
+  let foodItemList = []
+  categoriesSupa.map((category, index) => {
+    categories.push(category.category_name)
+    foodItemList = foodItemList.concat(category.fooditems)
   })
 
+  // const categories = []
+  // let productList = []
+  // CategoryList.map((category, index) => {
+  //   categories.push(category.categoryName)
+  //   productList = productList.concat(category.productList)
+  // })
+
   const productKeyed = {}
-  productList.map((product, index) => {
-    productKeyed[product.productId] = product
+  foodItemList.map((foodItem, index) => {
+    productKeyed[foodItem.item_id] = foodItem
   })
-  console.log(productKeyed)
+  // console.log(productKeyed)
 
   const isBreakpoint = useMediaQuery(768)
 
@@ -73,24 +104,27 @@ export default function Home() {
           {/* categories  */}
             <CategoryCard categories={categories} />
 
-            <CartContext.Provider value={{cartItems, setCartItems}}>
+            
             {/* food detail  */}
-              <FoodItemList foodList={CategoryList}/>
+              <FoodItemList foodList={categoriesSupa}/>
               
             {/* cart detail  */}
               <CartDetail productKeyed={productKeyed}/>
-            </CartContext.Provider>
+            {/* </CartContext.Provider> */}
         </div>
         <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
       </main>)}
       { isBreakpoint && (
         <main>
-          <HeaderMob />
-
-          <CartContext.Provider value={{cartItems, setCartItems}}>
-            <FoodItemListMob foodList={CategoryList} />
+          <div className="flex flex-col">
+            <HeaderMob />
+            <CategorySelectMob categories={categories} />
+          {/* <CartContext.Provider value={{cartItems, setCartItems}}> */}
+            <FoodItemListMob foodList={categoriesSupa} />
             <CartNavBarMob productKeyed={productKeyed}/>
-          </CartContext.Provider>
+          {/* </CartContext.Provider> */}
+          <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
+          </div>
         </main>
       )}
     </div>
