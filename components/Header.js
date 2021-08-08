@@ -1,18 +1,22 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { useUser } from '@/utils/useUser'
 
 export const Header = () => {
+    const { user, signOut } = useUser();
+
     return (
         <div className="flex bg-red-500 p-5 justify-evenly flex-row">
             {/* image */}
             <div className="flex flex-row gap-10">
                 <Image 
                     className="rounded-xl"
-                    src="/logo.png"
+                    src="/restro.jpg"
                     width={100}
                     height={100}
                 />
                 {/* shop name */}
-                <p className="self-center text-4xl text-white font-semibold">Tama Foods</p>
+                <p className="self-center text-4xl text-white font-semibold">Nepali Khaja Ghar</p>
             </div>
             {/* contact  */}
             <div className="flex flex-col gap-1 self-center">
@@ -20,7 +24,10 @@ export const Header = () => {
                 <p className="bg-white rounded-full text-center p-2 pl-4 pr-4 border-2 border-black font-semibold self-center">+9779810106632</p>
             </div>
             {/* past history */}
-            <p className="bg-white rounded-full text-center p-2 pl-4 pr-4 border-2 border-black font-semibold self-center">Order History</p>
+            <Link href='/orders'>
+                <p className="bg-white cursor-pointer rounded-full text-center p-2 pl-4 pr-4 border-2 border-black font-semibold self-center">Order History</p>
+            </Link>
+            { user && <p onClick={() => signOut()} className="bg-white cursor-pointer rounded-full text-center p-2 pl-4 pr-4 border-2 border-black font-semibold self-center">Logout</p>}
         </div>
     )
 }

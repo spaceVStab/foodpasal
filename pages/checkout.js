@@ -95,6 +95,7 @@ export const Checkout = () => {
                 .from('orders')
                 .insert(orderList)
             console.log(data)
+            router.replace('/orders')
         } catch(error) {
             console.log(error)
         }
@@ -103,7 +104,7 @@ export const Checkout = () => {
     return (
         <div className="flex flex-col gap-10 bg-gray-100">
             <Link href='/'>
-            <div onClick={() => router.replace('/')} className="flex flex-row h-16 pl-5 bg-gray-400">
+            <div onClick={() => router.replace('/')} className="cursor-pointer flex flex-row h-16 pl-5 bg-gray-400">
                 <PlusIcon className="transform rotate-45 h-8 self-center" />
                 <p className="text-2xl font-medium self-center">Cancel</p>
             </div>
