@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     HeartIcon,
     PlusCircleIcon,
@@ -11,6 +11,12 @@ import { CartContext } from "./CartContext";
 export const FoodUnitMob = ( props ) => {
     const [itemCount, setItemCount] = useState(0);
     const {cartItems, setCartItems} = useContext(CartContext)
+
+    useEffect(() => {
+        if(props.foodItems.item_id in cartItems) {
+            setItemCount(cartItems[props.foodItems.item_id])
+        }
+    }, [])
 
     const decreaseItemCount = () => {
         setItemCount(itemCount-1<=0 ? 0 : itemCount-1)

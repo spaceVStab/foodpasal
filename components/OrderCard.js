@@ -1,5 +1,5 @@
 export const OrderCard = ({orderItem}) => {
-    console.log(orderItem)
+    // console.log(orderItem)
     // console.log(productItem)
     return (
         <div className="self-center flex w-80 md:w-96 pt-5 pb-5 ml-4 mr-4 flex-col gap-2 rounded-2xl shadow-lg">

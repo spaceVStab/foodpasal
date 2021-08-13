@@ -33,7 +33,7 @@ export const FoodUnit = ( props ) => {
         setItemCount(itemCount+1)
         const cart = {...cartItems};
         // check if exists
-        console.log(cart)
+        // console.log(cart)
         if (props.foodItems.item_id in cart) {
             const c = cart[props.foodItems.item_id]
             cart[props.foodItems.item_id] = 1 + c
@@ -47,7 +47,7 @@ export const FoodUnit = ( props ) => {
 
     return(
         <div className="flex flex-col pt-5 pb-5 lg:flex-row gap-5">
-            <img 
+            <Image
                 className="rounded-lg"
                 src={props.foodItems.item_image_1}
                 width={150}

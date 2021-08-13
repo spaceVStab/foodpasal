@@ -65,7 +65,7 @@ const useMediaQuery = (width) => {
 
 export default function Home( {categoriesSupa} ) {
 
-  console.log(categoriesSupa)
+  // console.log(categoriesSupa)
 
   const categories = []
   let foodItemList = []

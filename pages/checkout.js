@@ -59,8 +59,8 @@ export const Checkout = () => {
             })
             setTotalsum(sum);
 
-            console.log(data)
-            console.log(itemIdDetailDict)
+            // console.log(data)
+            // console.log(itemIdDetailDict)
             setCartFoodItems(data)
             setCartIdDetailDict(itemIdDetailDict)
         } catch (error) {
@@ -94,7 +94,7 @@ export const Checkout = () => {
             const {data, error} = await supabase
                 .from('orders')
                 .insert(orderList)
-            console.log(data)
+            // console.log(data)
             router.replace('/orders')
         } catch(error) {
             console.log(error)

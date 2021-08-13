@@ -11,10 +11,6 @@ export const FoodCategoryList = ( props ) => {
 
     const [itemCount, setItemCount] = useState({});
 
-    useEffect( ()=> {
-        console.log(itemCount)
-    }, [itemCount])
-
     const decreaseItemCount = (productId) => {
         let temp = itemCount
         if(productId in temp) {

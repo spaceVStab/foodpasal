@@ -41,7 +41,7 @@ const SignIn = () => {
 
 
     if(!user){
-        console.log(user)
+        // console.log(user)
         return (
             <div className="flex flex-col">
                 <h1 className="text-2xl font-semibold ml-auto mr-auto">
