@@ -95,6 +95,7 @@ export const Checkout = () => {
                 .from('orders')
                 .insert(orderList)
             // console.log(data)
+            setCartItems({})
             router.replace('/orders')
         } catch(error) {
             console.log(error)
