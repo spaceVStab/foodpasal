@@ -33,7 +33,7 @@ export const Orders = () => {
     }
 
     return(
-        <div className="flex flex-col">
+        <div className="text-black flex flex-col">
             <div onClick={() => router.replace('/')} className="cursor-pointer flex flex-row h-16 pl-5 bg-gray-300">
                 <ChevronLeftIcon className="h-8 self-center" />
                 <p className="text-2xl font-medium self-center">Back</p>

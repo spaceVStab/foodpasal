@@ -43,7 +43,7 @@ const SignIn = () => {
     if(!user){
         // console.log(user)
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col m-20 ml-auto mr-auto text-black">
                 <h1 className="text-2xl font-semibold ml-auto mr-auto">
                     Existing Users Signin 
                 </h1>
@@ -52,6 +52,15 @@ const SignIn = () => {
                     <div className="ml-auto mr-auto text-red-500 font-semibold">{message.content}</div>
                 )}
                 
+                <form onSubmit={handleOAuthSignIn('google')} className="flex gap-4 flex-col">
+                    <button
+                        disabled={loading}
+                    >
+                        Sign In With Google
+                    </button>
+                </form>
+
+
                 <form onSubmit={handleSignin} className="flex gap-4 flex-col">
                     <input 
                         type="email"
@@ -76,13 +85,6 @@ const SignIn = () => {
                         Sign In
                     </button>
                 </form>
-                    {/* <button
-                        disabled={loading}
-                        onClick={() => handleOAuthSignIn('google')}
-                    >
-                        Sign In With Google
-                    </button>
-                </form> */}
                 <h1 className="text-xl font-medium ml-auto mr-auto mb-2">
                     Signup Instead
                 </h1>

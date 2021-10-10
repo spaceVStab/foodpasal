@@ -47,7 +47,7 @@ export const FoodUnit = ( props ) => {
 
     return(
         <div className="flex flex-col pt-5 pb-5 lg:flex-row gap-5">
-            <Image
+            <img
                 className="rounded-lg"
                 src={props.foodItems.item_image_1}
                 width={150}
@@ -55,7 +55,7 @@ export const FoodUnit = ( props ) => {
             />
             <div className="flex flex-col gap-5">
                 <p className="text-xl font-semibold">{props.foodItems.item_name}</p>
-                <p className="w-80 text-md font-light">{props.foodItems.item_description}</p>
+                <p className="md:w-60 w-80 text-md font-light">{props.foodItems.item_description}</p>
                 <div className="flex flex-row justify-between">
                     <p className="self-center text-xl">Rs. {props.foodItems.item_price}/-</p>
                     <div>

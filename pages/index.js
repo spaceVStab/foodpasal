@@ -90,7 +90,7 @@ export default function Home( {categoriesSupa} ) {
   const isBreakpoint = useMediaQuery(768)
 
   return (
-    <div>
+    <div className="text-black">
       <Head>
         <title>Create Next App</title>
       </Head>
