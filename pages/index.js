@@ -115,7 +115,7 @@ export default function Home( {categoriesSupa} ) {
         <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
       </main>)}
       { isBreakpoint && (
-        <main>
+        <main className="bg-white">
           <div className="flex flex-col">
             <HeaderMob />
             <CategorySelectMob categories={categories} />

@@ -52,13 +52,13 @@ const SignIn = () => {
                     <div className="ml-auto mr-auto text-red-500 font-semibold">{message.content}</div>
                 )}
                 
-                <form onSubmit={handleOAuthSignIn('google')} className="flex gap-4 flex-col">
+                {/* <form onSubmit={handleOAuthSignIn('google')} className="flex gap-4 flex-col">
                     <button
                         disabled={loading}
                     >
                         Sign In With Google
                     </button>
-                </form>
+                </form> */}
 
 
                 <form onSubmit={handleSignin} className="flex gap-4 flex-col">
