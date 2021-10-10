@@ -10,7 +10,16 @@ const SignUp = () => {
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState({ type: '', content: '' });
 	const router = useRouter();
-	const { signUp } = useUser();
+	const { signUp, signIn } = useUser();
+
+	const handleOAuthSignIn = async (provider) => {
+        setLoading(true);
+        const {error} = await signIn({provider});
+        if(error){
+            setMessage({type:'error', content: error.message});
+        }
+        setLoading(false);
+    }
 
 	const handleSignup = async (e) => {
 		e.preventDefault();
@@ -45,14 +54,26 @@ const SignUp = () => {
 	}
 
 	return (
-		<div className="text-black flex flex-col bg-white">
+		<div className="text-black flex m-20 flex-col gap-5 bg-white">
 			<h1 className="text-2xl font-semibold ml-auto mr-auto">
-				Sign Up with Email Id
+				Create Account
 			</h1>
 
 			{message.content && (
 				<div className="ml-auto mr-auto text-red-500 font-semibold">{message.content}</div>
 			)}
+
+			<button
+				onClick={() => handleOAuthSignIn('google')}
+				className="text-white bg-green-500 h-10 font-semibold w-80 mr-auto ml-auto rounded-3xl border-2 text-xl border-green-500 md:hover:bg-green-500 md:hover:text-white transform md:hover:scale-110 transition md:ease-in md:duration-150"
+			>
+				SignUp With Google
+			</button>
+			
+			<div className="text-center">
+				<p>SignUp With Email Instead</p>
+			</div>
+
 
 			<form onSubmit={handleSignup} className="flex flex-col gap-4">
 				<input 
@@ -60,7 +81,7 @@ const SignUp = () => {
 					placeholder="Email"
 					onChange={(e) => setEmail(e.target.value)}
 					required
-					className="outline-none border-2 border-red-500 pl-5 h-10 rounded-2xl text-lg w-80 mr-auto ml-auto mt-10"
+					className="outline-none border-2 border-red-500 pl-5 h-10 rounded-2xl text-lg w-80 mr-auto ml-auto"
 				/>
 				<input 
 					type="password"

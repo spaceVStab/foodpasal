@@ -43,22 +43,26 @@ const SignIn = () => {
     if(!user){
         // console.log(user)
         return (
-            <div className="flex flex-col m-20 ml-auto mr-auto text-black bg-white">
+            <div className="flex flex-col gap-5 m-20 ml-auto mr-auto text-black bg-white">
                 <h1 className="text-2xl font-semibold ml-auto mr-auto">
-                    Existing Users Signin 
+                    Existing Users Login 
                 </h1>
                 
                 {message.content && (
                     <div className="ml-auto mr-auto text-red-500 font-semibold">{message.content}</div>
                 )}
                 
-                {/* <form onSubmit={handleOAuthSignIn('google')} className="flex gap-4 flex-col">
-                    <button
-                        disabled={loading}
-                    >
-                        Sign In With Google
-                    </button>
-                </form> */}
+                <button
+                    onClick={() => handleOAuthSignIn('google')}
+                    className="text-white bg-green-500 h-10 font-semibold w-80 mr-auto ml-auto rounded-3xl border-2 text-xl border-green-500 md:hover:bg-green-500 md:hover:text-white transform md:hover:scale-110 transition md:ease-in md:duration-150"
+                >
+                    Sign In With Google
+                </button>
+
+                <div className="text-center">
+                    <p>Login With Email Instead</p>
+                </div>
+
 
 
                 <form onSubmit={handleSignin} className="flex gap-4 flex-col">
@@ -68,7 +72,7 @@ const SignIn = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="outline-none border-2 border-red-500 pl-5 h-10 rounded-2xl text-lg w-80 mr-auto ml-auto mt-10"
+                        className="outline-none border-2 border-red-500 pl-5 h-10 rounded-2xl text-lg w-80 mr-auto ml-auto"
                     />
                     <input
                         type="password"
@@ -86,7 +90,7 @@ const SignIn = () => {
                     </button>
                 </form>
                 <h1 className="text-xl font-medium ml-auto mr-auto mb-2">
-                    Signup Instead
+                    Don't have account? Signup Below
                 </h1>
                  <Link href="/register">
                     <button
