@@ -43,7 +43,7 @@ const SignIn = () => {
     if(!user){
         // console.log(user)
         return (
-            <div className="flex flex-col m-20 ml-auto mr-auto text-black">
+            <div className="flex flex-col m-20 ml-auto mr-auto text-black bg-white">
                 <h1 className="text-2xl font-semibold ml-auto mr-auto">
                     Existing Users Signin 
                 </h1>

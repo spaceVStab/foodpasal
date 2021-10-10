@@ -45,7 +45,7 @@ const SignUp = () => {
 	}
 
 	return (
-		<div className="text-black flex flex-col">
+		<div className="text-black flex flex-col bg-white">
 			<h1 className="text-2xl font-semibold ml-auto mr-auto">
 				Sign Up with Email Id
 			</h1>

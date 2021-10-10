@@ -9,6 +9,7 @@ export const CategorySelectMob = ( {categories} ) => {
             >
                 {categories.map((category, index) => (
                     <a href={"#"+category}>
+                    {/* {index==0 && <MenuItem selected value={category}>{category}</MenuItem>} */}
                     <MenuItem value={category}>{category}</MenuItem>
                     </a>
                 ))}
