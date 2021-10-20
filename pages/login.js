@@ -9,7 +9,7 @@ const SignIn = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', content: '' });
     const router = useRouter();
-    const {user, signIn} = useUser();
+    const {user, signIn, signInWithGoogle} = useUser();
 
     const handleSignin = async (e) => {
         e.preventDefault();
@@ -26,7 +26,7 @@ const SignIn = () => {
 
     const handleOAuthSignIn = async (provider) => {
         setLoading(true);
-        const {error} = await signIn({provider});
+        const {error} = await signInWithGoogle();
         if(error){
             setMessage({type:'error', content: error.message});
         }
