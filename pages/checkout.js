@@ -77,7 +77,8 @@ export const Checkout = () => {
 
             let sum = 0;
             Object.entries(cartItems).map((v,k) => {
-                sum += parseInt(itemIdDetailDict[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1]);
+                // sum += parseInt(itemIdDetailDict[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1]);
+                sum += parseInt(itemIdDetailDict[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * (100 - parseInt(itemIdDetailDict[v[0].toString()].discount_percentage.toString().replace(/[^0-9]/g,'')))/100 * parseInt(v[1]);
             })
             setTotalsum(sum);
 
@@ -131,7 +132,7 @@ export const Checkout = () => {
                 const temp = {}
                 temp["shop_id"]=shop_id
                 temp["item_id"]=v[0]
-                temp["selling_price"]=cartIdDetailDict[v[0]].item_price
+                temp["selling_price"]=cartIdDetailDict[v[0]].item_price * (100 - cartIdDetailDict[v[0].toString()].discount_percentage)/100 
                 temp["purchase_unit_count"]=v[1]
                 temp["purchase_item_name"]=cartIdDetailDict[v[0]].item_name
                 temp["order_consumer_note"]=note
@@ -252,7 +253,7 @@ export const Checkout = () => {
                                 (<div>
                                     <p className="text-lg font-medium">{cartIdDetailDict[v[0].toString()].item_name}</p>
                                     <div className="flex flex-row justify-between">
-                                        <p className="font-light">Rs. {cartIdDetailDict[v[0].toString()].item_price}/-</p>
+                                        <p className="font-light">Rs. {cartIdDetailDict[v[0].toString()].item_price * (100 - cartIdDetailDict[v[0].toString()].discount_percentage)/100 }/-</p>
                                         <p className="font-medium">x {v[1]}</p>
                                     </div>
                                     {/* {v[1]>0 && <p>{parseInt(productKeyed[k.toString()].productPrice.replace(/[^0-9]/g,'')) * parseInt(v[1])}</p>} */}

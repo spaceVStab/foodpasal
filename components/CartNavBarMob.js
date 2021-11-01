@@ -16,7 +16,8 @@ export const CartNavBarMob = ({productKeyed}) => {
         let count = 0;
         Object.entries(cartItems).map((v,k) => {
             count += parseInt(v[1]);
-            sum += parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1]);
+            // sum += parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1]);
+            sum += parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * (100 - parseInt(productKeyed[v[0].toString()].discount_percentage.toString().replace(/[^0-9]/g,'')))/100 * parseInt(v[1]);
         })
         setTotalSum(sum)
         setTotalItem(count)
@@ -54,9 +55,9 @@ export const CartNavBarMob = ({productKeyed}) => {
                             <div>
                                 {v[1]>0 && <p className="text-2xl font-medium">{productKeyed[v[0].toString()].item_name}</p>}
                                 <div className="flex flex-row justify-between">
-                                    {v[1]>0 && <p className="font-light text-xl">Rs. {productKeyed[v[0].toString()].item_price}/-</p>}
+                                    {v[1]>0 && <p className="font-light text-xl">Rs. {productKeyed[v[0].toString()].item_price * (100 - productKeyed[v[0].toString()].discount_percentage)/100 }/-</p>}
                                     {v[1]>0 && <p className="font-medium text-xl">x {v[1]}</p>}
-                                    {v[1]>0 && <p className="text-xl">Rs. {parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * parseInt(v[1])}/-</p>}
+                                    {v[1]>0 && <p className="text-xl">Rs. {parseInt(productKeyed[v[0].toString()].item_price.toString().replace(/[^0-9]/g,'')) * (100 - parseInt(productKeyed[v[0].toString()].discount_percentage.toString().replace(/[^0-9]/g,'')))/100 * parseInt(v[1])}/-</p>}
                                 </div>
                             </div>
                         ))}

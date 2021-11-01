@@ -47,17 +47,27 @@ export const FoodUnit = ( props ) => {
 
     return(
         <div className="flex flex-col pt-5 pb-5 lg:flex-row gap-5">
-            <img
-                className="rounded-lg"
-                src={props.foodItems.item_image_1}
-                width={150}
-                height={150}
-            />
+            <div className="relative">
+                <img
+                    className="rounded-lg"
+                    src={props.foodItems.item_image_1}
+                    width={150}
+                    height={150}
+                />
+                { props.foodItems.discount_percentage > 0 && <p className="text-white bg-gray-700 pl-1 pr-2 rounded-full md:text-lg absolute -top-2 -left-2">{props.foodItems.discount_percentage}% Off</p>}
+            </div>
             <div className="flex flex-col gap-5">
                 <p className="text-xl font-semibold">{props.foodItems.item_name}</p>
                 <p className="md:w-60 w-80 text-md font-light">{props.foodItems.item_description}</p>
                 <div className="flex flex-row justify-between">
-                    <p className="self-center text-xl">Rs. {props.foodItems.item_price}/-</p>
+                    {/* <p className="self-center text-xl">Rs. {props.foodItems.item_price}/-</p> */}
+                    <div className="flex flex-col gap-1">
+                        <p className="font-light">Price.</p>
+                        <div className="flex flex-row gap-1">
+                        { props.foodItems.discount_percentage > 0 && <p className="font-light md:text-lg"><strike>{parseInt(props.foodItems.item_price)}/-</strike></p>}
+                        <p className="font-medium md:text-xl">{parseInt(parseInt(props.foodItems.item_price) * (1 - (props.foodItems.discount_percentage/100)))}/-</p>
+                        </div>
+                    </div>
                     <div>
                         <p className="text-sm font-light mt-2">No. Of Unit</p>
                         <div className="flex flex-row gap-2">

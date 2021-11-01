@@ -44,19 +44,23 @@ export const FoodUnitMob = ( props ) => {
 
     return (
         <div className="flex flex-row gap-5 self-center pt-2 pb-2">
-            <div className="self-center">
+            <div className="self-center relative">
                 <Image
                 src={props.foodItems.item_image_1}
                 className="rounded-lg"
                 width={100}
                 height={100}
                 />
+                { props.foodItems.discount_percentage > 0 && <p className="text-white bg-gray-700 pl-1 pr-2 rounded-full md:text-md absolute -top-2 -left-2">{props.foodItems.discount_percentage}% Off</p>}
             </div>
             <div className="flex flex-col justify-around">
                 <p className="text-xl font-semibold">{props.foodItems.item_name}</p>
                 <p className="w-52 text-sm font-light">{props.foodItems.item_description}</p>
                 <div className="flex flex-row justify-between">
-                    <p className="self-center text-lg">Rs. {props.foodItems.item_price}/-</p>
+                    <div className="flex flex-col gap-0">
+                    { props.foodItems.discount_percentage > 0 && <p className="font-light md:text-sm"><strike>{parseInt(props.foodItems.item_price)}/-</strike></p>}
+                    <p className="self-center text-lg">Rs. {parseInt(parseInt(props.foodItems.item_price) * (1 - (props.foodItems.discount_percentage/100)))}/-</p>
+                    </div>
                     <div>
                         {/* <p className="text-sm font-light mt-2">No. Of Unit</p> */}
                         <div className="flex flex-row gap-2">
