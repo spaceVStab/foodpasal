@@ -28,7 +28,10 @@ export const UserConextProvider = (props) => {
           session, 
           user,
           signIn: (options) => supabase.auth.signIn(options),
-          signInWithGoogle: (options) => supabase.auth.signIn({provider:'google'}, {redirectTo:'https://khajaghar.stackmystore.com'}),
+          signInWithGoogle: (options) => 
+          supabase.auth.signIn(
+            {provider:'google'},  
+            {redirectTo:'https://khajaghar.stackmystore.com'}),
           signUp: (options) => supabase.auth.signUp(options),
           signOut: () => supabase.auth.signOut()
       }

@@ -63,8 +63,6 @@ const SignIn = () => {
                     <p>Login With Email Instead</p>
                 </div>
 
-
-
                 <form onSubmit={handleSignin} className="flex gap-4 flex-col">
                     <input 
                         type="email"

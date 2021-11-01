@@ -8,6 +8,7 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/solid";
 import { PlusIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { shop_id, supabase } from "@/utils/supabaseClient";
+import KhaltiCheckout from "khalti-checkout-web";
 
 export const Checkout = () => {
 
@@ -21,6 +22,9 @@ export const Checkout = () => {
     const [totalsum, setTotalsum] = useState(0);
     const [cartFoodItems, setCartFoodItems] = useState([])
     const [cartIdDetailDict, setCartIdDetailDict] = useState({})
+    const bot_id = '2097222257:AAFUGrJDCbPuDh6GVd1ul82VFA4p1bhfHvE'
+    let telegramUrl = 'https://api.telegram.org/bot' + bot_id + '/sendMessage'
+    const chat_id = '@KhajaGharSMS'
 
     useEffect(() => {
         if(!user) router.replace("/login")
@@ -32,6 +36,24 @@ export const Checkout = () => {
             <p>Redirecting...</p>
         </div>
     )
+
+    const telegramNotify = async (data) => {
+        try {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    chat_id: chat_id,
+                    text: "Order Received"
+                })
+            };
+            const response = await fetch(telegramUrl, requestOptions);
+            const data = await response.json();
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const getCartFoodItems = async () => {
         try {
@@ -68,6 +90,40 @@ export const Checkout = () => {
         }
     }
 
+    const khaltiPayment = async () => {
+        console.log("proceeding with khalti payment gateway");
+        let config = {
+            // replace this key with yours
+            "publicKey": "test_public_key_b5c79f2b7bca4bff82d320d8c9ef7ac5",
+            "productIdentity": "1234567890",
+            "productName": "Drogon",
+            "productUrl": "http://gameofthrones.com/buy/Dragons",
+            "eventHandler": {
+                onSuccess (payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                },
+                // onError handler is optional
+                onError (error) {
+                    // handle errors
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            },
+            "paymentPreference": ["KHALTI", "EBANKING","MOBILE_BANKING", "CONNECT_IPS", "SCT"],
+        };
+        
+        let checkout = new KhaltiCheckout(config);
+        checkout.show({amount: 1000});
+        // let btn = document.getElementById("khalti-payment-button");
+        // btn.onclick = function () {
+        //     // minimum transaction amount must be 10, i.e 1000 in paisa.
+        //     checkout.show({amount: 1000});
+        // }
+    }
+
     const placeOrderCOD = async () => {
         const orderList = []
         Object.entries(cartItems).map((v, k) => {
@@ -95,6 +151,8 @@ export const Checkout = () => {
                 .from('orders')
                 .insert(orderList)
             // console.log(data)
+            // send pop up message to Telegram channel
+            telegramNotify(data)
             setCartItems({})
             router.replace('/orders')
         } catch(error) {
@@ -152,6 +210,7 @@ export const Checkout = () => {
                     <Select
                         className="outline-none border-2 border-red-500 pl-5 h-10 rounded-xl text-lg w-80 mr-auto ml-auto"
                         onChange={(e) => {
+                            console.log(e.target.value);
                             setPaymode(e.target.value);
                         } }
                     >
@@ -171,6 +230,15 @@ export const Checkout = () => {
                             </div>
                         )
                     }
+                    {/* {
+                        name.length>0 && number.length>=10 && address.length>0 &&
+                        paymode=='khaltipayment' && (
+                            <div onClick={() => khaltiPayment()} className="self-center cursor-pointer pl-5 pr-5 flex flex-row bg-red-500 rounded-2xl shadow-xl">
+                                <p className="self-center text-2xl font-medium text-white">Proceed to Payment</p>
+                                <ChevronDoubleRightIcon className="self-center text-white h-10"/>
+                            </div>
+                        )
+                    } */}
                 </div>
                 { Object.entries(cartIdDetailDict).length > 0 && (
                 <div className="self-center">
