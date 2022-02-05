@@ -1,5 +1,5 @@
 module.exports = {
     images: {
-        domains: ['pizcffmijqkrsccyopze.supabase.co']
+        domains: [process.env.SUPABASEDOMAIN]
     }
 }

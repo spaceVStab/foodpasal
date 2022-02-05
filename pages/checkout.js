@@ -91,6 +91,8 @@ export const Checkout = () => {
         }
     }
 
+
+    // FIXME
     const khaltiPayment = async () => {
         console.log("proceeding with khalti payment gateway");
         let config = {
