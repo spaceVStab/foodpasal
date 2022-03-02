@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "@/utils/useUser";
+import Head from "next/head";
 
 const SignUp = () => {
 	const [user, setUser] = useState(null);
@@ -55,6 +56,10 @@ const SignUp = () => {
 
 	return (
 		<div className="text-black flex m-20 flex-col gap-5 bg-white">
+			<Head>
+				<title>KhajaGhar | StackMyStore</title>
+				<meta name="description" content="Welcome to Homepage of StackMyStore. The fastest and easiest way of starting your ecommerce platform" />
+			</Head>
 			<h1 className="text-2xl font-semibold ml-auto mr-auto">
 				Create Account
 			</h1>

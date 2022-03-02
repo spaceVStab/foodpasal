@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "@/utils/useUser";
 import Link from "next/link";
+import Head from "next/head";
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -44,6 +45,11 @@ const SignIn = () => {
         // console.log(user)
         return (
             <div className="flex flex-col gap-5 m-20 ml-auto mr-auto text-black bg-white">
+                <Head>
+                    <title>KhajaGhar | StackMyStore</title>
+                    <meta name="description" content="Welcome to Homepage of StackMyStore. The fastest and easiest way of starting your ecommerce platform" />
+                </Head>
+
                 <h1 className="text-2xl font-semibold ml-auto mr-auto">
                     Existing Users Login 
                 </h1>

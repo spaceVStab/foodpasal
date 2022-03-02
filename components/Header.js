@@ -6,7 +6,7 @@ export const Header = () => {
     const { user, signOut } = useUser();
 
     return (
-        <div className="flex bg-red-500 shadow-xl p-5 justify-around flex-row">
+        <div className="flex bg-gradient-to-r from-red-500 to-pink-600 shadow-xl p-5 justify-around flex-row">
             {/* image */}
             <div className="flex flex-row gap-10">
                 <Image 
@@ -14,6 +14,7 @@ export const Header = () => {
                     src="/restro.jpg"
                     width={100}
                     height={100}
+                    alt="logo shop image"
                 />
                 {/* shop name */}
                 <p className="self-center text-4xl text-white font-semibold">Nepali Khaja Ghar</p>

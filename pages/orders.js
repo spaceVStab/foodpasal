@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useUser } from "@/utils/useUser";
+import Head from "next/head";
 import router from "next/router";
 import OrderCard from "@/components/OrderCard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
@@ -34,6 +35,10 @@ export const Orders = () => {
 
     return(
         <div className="text-black flex flex-col bg-white">
+            <Head>
+                <title>KhajaGhar | StackMyStore</title>
+                <meta name="description" content="Welcome to Homepage of StackMyStore. The fastest and easiest way of starting your ecommerce platform" />
+            </Head>
             <div onClick={() => router.replace('/')} className="cursor-pointer flex flex-row h-16 pl-5 bg-gray-300">
                 <ChevronLeftIcon className="h-8 self-center" />
                 <p className="text-2xl font-medium self-center">Back</p>

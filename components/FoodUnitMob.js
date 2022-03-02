@@ -50,6 +50,7 @@ export const FoodUnitMob = ( props ) => {
                 className="rounded-lg"
                 width={100}
                 height={100}
+                alt={props.foodItems.item_description}
                 />
                 { props.foodItems.discount_percentage > 0 && <p className="text-white bg-gray-700 pl-1 pr-2 rounded-full md:text-md absolute -top-2 -left-2">{props.foodItems.discount_percentage}% Off</p>}
             </div>

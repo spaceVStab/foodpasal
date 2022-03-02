@@ -53,6 +53,7 @@ export const FoodUnit = ( props ) => {
                     src={props.foodItems.item_image_1}
                     width={150}
                     height={150}
+                    alt={props.foodItems.item_description}
                 />
                 { props.foodItems.discount_percentage > 0 && <p className="text-white bg-gray-700 pl-1 pr-2 rounded-full md:text-lg absolute -top-2 -left-2">{props.foodItems.discount_percentage}% Off</p>}
             </div>

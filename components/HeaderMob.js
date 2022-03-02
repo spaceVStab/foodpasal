@@ -26,6 +26,7 @@ export const HeaderMob = () => {
             <div className="max-h-40 overflow-hidden">
                 <img
                     src="/restro.jpg"
+                    alt="shop logo"
                 />
             </div>
         </div>

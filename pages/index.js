@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 import CartNavBarMob from '@/components/CartNavBarMob'
 import { getActiveFoodItemsForShop } from '@/utils/supabaseClient'
 import { getCategory } from '@/utils/supabaseClient'
+import Footer from '@/components/Footer'
 
 export const getStaticProps = async () => {
   const products = await getActiveFoodItemsForShop();
@@ -92,7 +93,8 @@ export default function Home( {categoriesSupa} ) {
   return (
     <div className="text-black">
       <Head>
-        <title>Create Next App</title>
+        <title>KhajaGhar | StackMyStore</title>
+        <meta name="description" content="Welcome to Homepage of StackMyStore. The fastest and easiest way of starting your ecommerce platform" />
       </Head>
 
       {!isBreakpoint && (<main className="bg-gray-100">
@@ -112,7 +114,7 @@ export default function Home( {categoriesSupa} ) {
               <CartDetail productKeyed={productKeyed}/>
             {/* </CartContext.Provider> */}
         </div>
-        <p className="font-light text-xl text-center p-4">Powered By StackMyStore</p>
+        <Footer />
       </main>)}
       { isBreakpoint && (
         <main className="bg-white">
